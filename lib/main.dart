@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primaryColor: HexColor("AA3983"),
+          primaryColor: HexColor("AA398E"),
           primaryColorLight: HexColor("D33B93"),
-          accentColor: HexColor("DC68A3"),
+          accentColor: HexColor("DC68AE"),
           fontFamily: "lgc"
         ),
         home: StartUpScreen(),
