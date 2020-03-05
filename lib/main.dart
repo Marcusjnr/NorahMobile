@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:norah/providers/startup_screen_provider.dart';
-import 'package:norah/screens/startup_screen.dart';
+import 'package:norah/providers/login_screen_provider.dart';
+import 'package:norah/screens/activities/login_screen.dart';
 import 'package:norah/utils/hex_color.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => StartUpScreenProvider()),
+        ChangeNotifierProvider(create: (_) => LoginScreenProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           accentColor: HexColor("DC68AE"),
           fontFamily: "lgc"
         ),
-        home: StartUpScreen(),
+        home: LoginScreen(),
       ),
     );
   }

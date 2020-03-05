@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class StartUpScreenProvider extends ChangeNotifier{
+class LoginScreenProvider extends ChangeNotifier{
   bool hasRegisterd = false;
 
 

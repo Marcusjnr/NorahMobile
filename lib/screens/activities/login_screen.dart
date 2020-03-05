@@ -4,16 +4,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:norah/custom_widgets/custom_text_field.dart';
 import 'package:norah/custom_widgets/gradient_button.dart';
 import 'package:norah/custom_widgets/gradient_text.dart';
-import 'package:norah/providers/startup_screen_provider.dart';
+import 'package:norah/providers/login_screen_provider.dart';
+import 'package:norah/screens/activities/signup.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
-class StartUpScreen extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
-    return Consumer<StartUpScreenProvider>(
-      builder: (BuildContext context, StartUpScreenProvider startUpProvider, Widget child){
+    return Consumer<LoginScreenProvider>(
+      builder: (BuildContext context, LoginScreenProvider startUpProvider, Widget child){
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Stack(
@@ -61,9 +63,20 @@ class StartUpScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: RotatedBox(
-                        quarterTurns: 1,
-                          child: Text("Sign Up", style: TextStyle(fontSize: 20.0),)),
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                              PageTransition(
+                                type: PageTransitionType.leftToRightWithFade,
+                                child: SignUpScreen(),
+                              )
+                          );
+                        },
+                        child: RotatedBox(
+                          quarterTurns: 1,
+                            child: Text("Sign Up", style: TextStyle(fontSize: 20.0),)),
+                      ),
                     )
                   ],
                 ),
