@@ -1,11 +1,17 @@
 import 'package:flutter/foundation.dart';
 
 class LoginScreenProvider extends ChangeNotifier{
-  bool hasRegisterd = false;
+  bool hasRegistered = false;
+  bool loginPressed = true;
 
 
   void setHasRegistered(value){
-    hasRegisterd = value;
+    hasRegistered = value;
+    notifyListeners();
+  }
+
+  void setLoginPressed(value){
+    loginPressed = value;
     notifyListeners();
   }
 

@@ -2,13 +2,18 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  bool password;
-  String label;
-  IconData icon;
-  TextInputType inputType;
-  TextEditingController controller;
+  final bool password;
+  final String label;
+  final IconData icon;
+  final TextInputType inputType;
+  final TextEditingController controller;
 
-  CustomTextField({this.label, this.icon, this.inputType, this.password, this.controller});
+  CustomTextField({
+    this.label,
+    this.icon,
+    this.inputType,
+    this.password,
+    @required this.controller});
 
   @override
   Widget build(BuildContext context) {

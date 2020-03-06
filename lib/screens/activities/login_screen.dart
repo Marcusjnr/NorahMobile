@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:norah/custom_layouts/login_layout.dart';
+import 'package:norah/custom_layouts/signup_layout.dart';
 import 'package:norah/custom_widgets/custom_text_field.dart';
 import 'package:norah/custom_widgets/gradient_button.dart';
 import 'package:norah/custom_widgets/gradient_text.dart';
@@ -14,8 +18,10 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
+    TextEditingController _emailController, _passwordController;
+
     return Consumer<LoginScreenProvider>(
-      builder: (BuildContext context, LoginScreenProvider startUpProvider, Widget child){
+      builder: (BuildContext context, LoginScreenProvider loginProvider, Widget child){
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Stack(
@@ -45,37 +51,73 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(4.0),
-                      child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                      child: loginProvider.loginPressed
+                        ? Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: (){
+                              loginProvider.setLoginPressed(true);
+                            },
                             child: RotatedBox(
-                              quarterTurns: 1,
+                                quarterTurns: 1,
                                 child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 20),)),
                           ),
-                        decoration: BoxDecoration(
-                          color: primaryColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0)
-                          )
                         ),
+                        decoration: BoxDecoration(
+                            color: primaryColor,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8.0),
+                                topRight: Radius.circular(8.0)
+                            )
+                        ),
+                      ) :
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: (){
+                              loginProvider.setLoginPressed(true);
+                            },
+                            child: RotatedBox(
+                                quarterTurns: 1,
+                                child: Text("Login", style: TextStyle(color: Colors.black, fontSize: 20),)),
+                          ),
+                        ),
+
                       ),
                     ),
-                    Padding(
+
+                    loginProvider.loginPressed
+                    ?  Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: InkWell(
                         onTap: (){
-                          Navigator.push(
-                            context,
-                              PageTransition(
-                                type: PageTransitionType.leftToRightWithFade,
-                                child: SignUpScreen(),
-                              )
-                          );
+                          loginProvider.setLoginPressed(false);
                         },
                         child: RotatedBox(
-                          quarterTurns: 1,
+                            quarterTurns: 1,
                             child: Text("Sign Up", style: TextStyle(fontSize: 20.0),)),
+                      ),
+                    ) :
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: (){
+                            loginProvider.setLoginPressed(true);
+                          },
+                          child: RotatedBox(
+                              quarterTurns: 1,
+                              child: Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 20),)),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(8.0),
+                              bottomRight: Radius.circular(8.0)
+                          )
                       ),
                     )
                   ],
@@ -104,88 +146,12 @@ class LoginScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        child:  Column(
-                          children: <Widget>[
-                            CustomTextField(
-                              icon: Icons.account_circle,
-                              label: "Email",
-                              password: false,
-                              inputType: TextInputType.text,
-                            ),
-
-                            Container(
-                              height: 20.0,
-                            ),
-                            CustomTextField(
-                              icon: Icons.vpn_key,
-                              label: "Password",
-                              password: true,
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.all(30.0),
-                              child: GradientButton(
-                                text: "Login",
-                              ),
-                            ),
-
-                            Text("OR"),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Column(
-                                  children: <Widget>[
-                                    Container(
-                                      height: 50.0,
-                                      width: 50.0,
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue,
-                                          shape: BoxShape.circle
-                                      ),
-                                      child:  Center(
-                                        child: FaIcon(
-                                          FontAwesomeIcons.facebook,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Text("Login With Facebook"),
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  children: <Widget>[
-                                    Container(
-                                      height: 50.0,
-                                      width: 50.0,
-                                      decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          shape: BoxShape.circle
-                                      ),
-                                      child: Center(
-                                        child: FaIcon(
-                                          FontAwesomeIcons.google,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Text("Login With Google"),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            )
-
-                          ],
-                        )
-                      )
+                     AnimatedSwitcher(
+                       child: loginProvider.loginPressed
+                              ? LoginLayout(emailController: _emailController,passwordController: _passwordController)
+                              : SignUpLayout(),
+                       duration: Duration(seconds: 1),
+                     )
 
                     ],
                   ),
