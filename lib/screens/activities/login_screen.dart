@@ -9,7 +9,7 @@ import 'package:norah/custom_widgets/custom_text_field.dart';
 import 'package:norah/custom_widgets/gradient_button.dart';
 import 'package:norah/custom_widgets/gradient_text.dart';
 import 'package:norah/providers/login_screen_provider.dart';
-import 'package:norah/screens/activities/signup.dart';
+import 'package:norah/screens/activities/signup_question.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 

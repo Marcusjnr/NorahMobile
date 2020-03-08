@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:norah/custom_widgets/gradient_button.dart';
-import 'package:norah/screens/activities/signup.dart';
+import 'package:norah/screens/activities/signup_question.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignUpLayout extends StatelessWidget {
@@ -20,7 +20,7 @@ class SignUpLayout extends StatelessWidget {
                   Navigator.push(context,
                     PageTransition(
                       type: PageTransitionType.leftToRightWithFade,
-                      child: SignUpScreen()
+                      child: SignUpQuestionScreen()
                     )
                   );
                 },

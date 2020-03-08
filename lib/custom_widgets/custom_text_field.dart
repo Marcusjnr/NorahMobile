@@ -9,10 +9,10 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
 
   CustomTextField({
-    this.label,
-    this.icon,
-    this.inputType,
-    this.password,
+  @required this.label,
+  @required this.icon,
+  @required this.inputType,
+  @required this.password,
     @required this.controller});
 
   @override

@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/fa_icon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:norah/custom_widgets/custom_text_field.dart';
@@ -15,6 +16,7 @@ class LoginLayout extends StatelessWidget {
 });
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return  Container(
         width: MediaQuery.of(context).size.width,
         child:  Column(
@@ -28,17 +30,18 @@ class LoginLayout extends StatelessWidget {
             ),
 
             Container(
-              height: 20.0,
+              height: ScreenUtil().setHeight(20.0),
             ),
             CustomTextField(
               icon: Icons.vpn_key,
               label: "Password",
               password: true,
               controller: passwordController,
+              inputType: TextInputType.text,
             ),
 
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: EdgeInsets.all(ScreenUtil().setWidth(30.0)),
               child: GradientButton(
                 text: "Login",
               ),
@@ -66,7 +69,7 @@ class LoginLayout extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: EdgeInsets.only(top: ScreenUtil().setHeight(8.0)),
                       child: Text("Login With Facebook"),
                     )
                   ],
@@ -88,7 +91,7 @@ class LoginLayout extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: EdgeInsets.only(top: ScreenUtil().setHeight(8.0)),
                       child: Text("Login With Google"),
                     )
                   ],
