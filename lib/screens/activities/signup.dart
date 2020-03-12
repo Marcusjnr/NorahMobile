@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:norah/custom_widgets/custom_drop_down.dart';
 import 'package:norah/custom_widgets/custom_text_field.dart';
 import 'package:norah/custom_widgets/gradient_button.dart';
+import 'package:norah/screens/activities/homescreen.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SignUpScreen extends StatelessWidget {
   @override
@@ -82,8 +84,19 @@ class SignUpScreen extends StatelessWidget {
 
               Padding(
                 padding: const EdgeInsets.all(30.0),
-                child: GradientButton(
-                  text: "SignUp",
+                child: InkWell(
+                  onTap: (){
+                    Navigator.pushReplacement(
+                        context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRightWithFade,
+                        child: HomeScreen()
+                      )
+                    );
+                  },
+                  child: GradientButton(
+                    text: "SignUp",
+                  ),
                 ),
               )
             ],

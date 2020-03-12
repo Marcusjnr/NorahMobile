@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:norah/providers/home_screen_provider.dart';
 import 'package:norah/providers/login_screen_provider.dart';
 import 'package:norah/screens/activities/login_screen.dart';
 import 'package:norah/utils/hex_color.dart';
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LoginScreenProvider()),
+        ChangeNotifierProvider(create: (_) => HomeScreenProvider()),
+
       ],
       child: MaterialApp(
         theme: ThemeData(

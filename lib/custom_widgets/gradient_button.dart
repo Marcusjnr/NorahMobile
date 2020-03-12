@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:norah/utils/hex_color.dart';
 
 class GradientButton extends StatelessWidget {
-  String text;
+  final String text;
 
 
   GradientButton({this.text});
