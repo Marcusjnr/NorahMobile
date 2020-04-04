@@ -1,18 +1,23 @@
 
 import 'package:flutter/material.dart';
+import 'package:norah/providers/register_screen_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomDropDown extends StatelessWidget {
   final IconData icon;
   final List<String> options;
   final String hint;
+  final String whichDropDown;
 
   CustomDropDown({
     @required this.icon,
     this.options,
-    @required this.hint
+    @required this.hint,
+    @required this.whichDropDown
 });
   @override
   Widget build(BuildContext context) {
+    var registerProvider = Provider.of<RegisterProvider>(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 30.0),
       child: Container(
@@ -50,13 +55,18 @@ class CustomDropDown extends StatelessWidget {
                           color: Colors.black38,
                           fontWeight: FontWeight.w600
                       ),),
-                      items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                      items: <String>['Yes', 'No'].map((String value) {
                         return new DropdownMenuItem<String>(
                           value: value,
-                          child: new Text(value),
+                          child: Text(value),
                         );
                       }).toList(),
                       onChanged: (value) {
+                        if(whichDropDown == "Married"){
+                          registerProvider.setValueMarried(value);
+                        }else{
+                          registerProvider.setValueGotKids(value);
+                        }
 
                       },
                     ),

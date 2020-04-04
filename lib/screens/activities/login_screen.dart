@@ -1,28 +1,38 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/fa_icon.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:norah/custom_layouts/login_layout.dart';
 import 'package:norah/custom_layouts/signup_layout.dart';
-import 'package:norah/custom_widgets/custom_text_field.dart';
-import 'package:norah/custom_widgets/gradient_button.dart';
 import 'package:norah/custom_widgets/gradient_text.dart';
 import 'package:norah/providers/login_screen_provider.dart';
-import 'package:norah/screens/activities/signup_question.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:norah/screens/activities/homescreen.dart';
+import 'package:norah/services/hive_service.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+
+class _LoginScreenState extends State<LoginScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    print(HiveService.check);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     Color accentColor = Theme.of(context).accentColor;
-    TextEditingController _emailController, _passwordController;
 
     return Consumer<LoginScreenProvider>(
       builder: (BuildContext context, LoginScreenProvider loginProvider, Widget child){
-        return Scaffold(
+        return HiveService.check
+            ? HomeScreen()
+            : Scaffold(
           resizeToAvoidBottomInset: false,
           body: Stack(
             children: <Widget>[
@@ -37,9 +47,9 @@ class LoginScreen extends StatelessWidget {
                     GradientText("Norah",
                       fontSize: 50.0,
                       gradient: LinearGradient(colors: [
-                      primaryColor,
-                      accentColor,
-                    ]),)
+                        primaryColor,
+                        accentColor,
+                      ]),)
 
                   ],
                 ),
@@ -52,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: loginProvider.loginPressed
-                        ? Container(
+                          ? Container(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: InkWell(
@@ -89,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                     ),
 
                     loginProvider.loginPressed
-                    ?  Padding(
+                        ?  Padding(
                       padding: const EdgeInsets.only(top: 8.0),
                       child: InkWell(
                         onTap: (){
@@ -125,42 +135,49 @@ class LoginScreen extends StatelessWidget {
               ),
 
               Container(
-                padding:
-                EdgeInsets.only(left: 20, bottom: 20, right: 20, top: 30),
-                margin: EdgeInsets.only(top: 320),
-                constraints: BoxConstraints.expand(
-                    height: MediaQuery.of(context).size.height - 320),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30)),
-                  boxShadow: [
-                    new BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 20.0,
-                    ),
-                  ],
-                ),
-
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                     AnimatedSwitcher(
-                       child: loginProvider.loginPressed
-                              ? LoginLayout(emailController: _emailController,passwordController: _passwordController)
-                              : SignUpLayout(),
-                       duration: Duration(seconds: 1),
-                     )
-
+                  padding:
+                  EdgeInsets.only(left: 20, bottom: 20, right: 20, top: 30),
+                  margin: EdgeInsets.only(top: 320),
+                  constraints: BoxConstraints.expand(
+                      height: MediaQuery.of(context).size.height - 320),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30)),
+                    boxShadow: [
+                      new BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 20.0,
+                      ),
                     ],
                   ),
-                )
+
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        AnimatedSwitcher(
+                          child: loginProvider.loginPressed
+                              ? LoginLayout()
+                              : SignUpLayout(),
+                          duration: Duration(seconds: 1),
+                        )
+
+                      ],
+                    ),
+                  )
               )
             ],
           ),
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    Hive.box('user_db').close();
   }
 }
