@@ -12,9 +12,15 @@ class LoginScreenProvider extends ChangeNotifier{
   LoginModel loginResponse = new LoginModel();
   bool loading = false;
   bool responseGotten = false;
+  String emailText = 'khkjh';
 
   void setHasRegistered(value){
     hasRegistered = value;
+    notifyListeners();
+  }
+
+  void setEmailText(String value){
+    emailText = value;
     notifyListeners();
   }
 

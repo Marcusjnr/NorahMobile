@@ -6,8 +6,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:norah/custom_widgets/custom_text_field.dart';
 import 'package:norah/custom_widgets/gradient_button.dart';
+import 'package:norah/custom_widgets/password_textfield.dart';
 import 'package:norah/providers/login_screen_provider.dart';
 import 'package:norah/services/hive_service.dart';
+import 'package:norah/utils/global.dart';
 import 'package:provider/provider.dart';
 
 class LoginLayout extends StatelessWidget {
@@ -15,8 +17,8 @@ class LoginLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _emailController = new TextEditingController();
-    TextEditingController  _passwordController = new TextEditingController();
+    final TextEditingController _emailController = new TextEditingController(text: email);
+    final TextEditingController  _passwordController = new TextEditingController(text: passwordTxt);
     var loginScreenProvider = Provider.of<LoginScreenProvider>(context);
     ScreenUtil.init(context);
 
@@ -35,7 +37,7 @@ class LoginLayout extends StatelessWidget {
                 Container(
                   height: ScreenUtil().setHeight(20.0),
                 ),
-                CustomTextField(
+                PasswordTextField(
                   icon: Icons.vpn_key,
                   label: "Password",
                   password: true,

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:norah/api/models/infermedica_models/DiagnosisSendingModel.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 mixin HiveService{
@@ -58,6 +59,8 @@ mixin HiveService{
     String firstName = _hiveBox.get(_firstNameKey);
     return firstName;
   }
+
+
 
   static Future<bool> getIsLoggedIn() async{
     if(_hiveBox == null){

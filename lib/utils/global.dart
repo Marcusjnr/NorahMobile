@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:norah/api/models/infermedica_models/DiagnosisSendingModel.dart';
 
 Color myGreen = Color(0xff4bb17b);
 enum MessageType {sent, received}
@@ -27,3 +28,8 @@ class Messages{
 List<Map<String, dynamic>> messages = [
 
 ];
+
+String email;
+String passwordTxt;
+
+

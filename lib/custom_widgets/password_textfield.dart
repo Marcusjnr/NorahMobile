@@ -4,18 +4,18 @@ import 'package:norah/providers/login_screen_provider.dart';
 import 'package:norah/utils/global.dart';
 import 'package:provider/provider.dart';
 
-class CustomTextField extends StatelessWidget {
+class PasswordTextField extends StatelessWidget {
   final bool password;
   final String label;
   final IconData icon;
   final TextInputType inputType;
   final TextEditingController controller;
 
-  CustomTextField({
-  @required this.label,
-  @required this.icon,
-  @required this.inputType,
-  @required this.password,
+  PasswordTextField({
+    @required this.label,
+    @required this.icon,
+    @required this.inputType,
+    @required this.password,
     @required this.controller});
 
   @override
@@ -39,8 +39,7 @@ class CustomTextField extends StatelessWidget {
             controller: controller,
             obscureText: password,
             onChanged: (String value){
-
-              email = value;
+              passwordTxt = value;
             },
             decoration: InputDecoration(
                 border: InputBorder.none,

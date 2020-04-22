@@ -62,6 +62,7 @@ class CustomDropDown extends StatelessWidget {
                         );
                       }).toList(),
                       onChanged: (value) {
+                        //todo update the state to yes or no when changed
                         if(whichDropDown == "Married"){
                           registerProvider.setValueMarried(value);
                         }else{
